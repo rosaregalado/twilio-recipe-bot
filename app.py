@@ -5,6 +5,10 @@ from twilio.twiml.messaging_response import MessagingResponse
 
 app = Flask("recipeBot")
 
+@app.route('/', methods=['POST', 'GET'])
+def home():
+  return "Hello world!"
+
 # messages route
 @app.route('/message', methods=['POST', 'GET'])
 def sms():
