@@ -29,10 +29,6 @@ def message():
   # print themealDB API data
   recipe = api_data['meals'][0]
 
-  # send image of prepared recipe
-  if recipe['strMealThumb'] != '':
-    media_msg.media(recipe['strMealThumb'])
-
   # recipe ingredients msg
   recipe_ingredients = ""
   recipe_ingredients += "\n --------------------------- \n"
@@ -56,6 +52,10 @@ def message():
       recipe_ingredients += recipeLine + "\n"
   recipe_ingredients += "\n --------------------------- \n"
 
+  # send image of prepared recipe
+  if recipe['strMealThumb'] != '':
+    media_msg.media(recipe['strMealThumb'])
+
   # recipe instructions msg
   recipe_instructions = ""
   recipe_instructions += "\n --------------------------- \n"
@@ -77,8 +77,8 @@ def message():
 
 
   # add content to msg body
-  media_msg.body(recipe_ingredients)
   text_msg.body(recipe_instructions)
+  media_msg.body(recipe_ingredients)
   return str(twilio_response)
 
 if __name__ == '__main__':
