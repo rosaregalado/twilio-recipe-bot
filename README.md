@@ -25,7 +25,6 @@ How it Works:
   f. Recipe source URL <br />
   g. Image of cooked meal<br />
 
-
 Demo:
 -------------------------------------------------------------------------
 ![](recipe-bot.gif)
