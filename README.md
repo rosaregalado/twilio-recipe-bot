@@ -22,6 +22,7 @@ How it works:
 
 Demo:
 -------------------------------------------------------------------------
+![How to use the app](recipe-bot-gif.mov / GIF)
 
 
 
