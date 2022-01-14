@@ -7,7 +7,7 @@ my twilio recipe bot automatically responds with the ingredients and instruction
 Tech Stack:
 -------------------------------------------------------------------------
 Python, Flask <br />
-themealDB API *Database API to get food recipes from around the world*<br />
+themealDB API -- *Database API to get food recipes from around the world*<br />
 Twilio MessagingResponse library (Programmable SMS using TwiML)<br />
 
 
