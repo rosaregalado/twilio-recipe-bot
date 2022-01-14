@@ -6,5 +6,8 @@ my twilio recipe bot automatically responds with the ingredients and instruction
 
 How it works:
 -------------------------------------------------------------------------
-
+1 - Send text message to twilio phone number: name of a food recipe <br />
+(e.g Salmon, Pizza, Peanut butter cookies)<br />
+<br />
+2 - Receive an automatic response with: <br />
 

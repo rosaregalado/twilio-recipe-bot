@@ -1,7 +1,7 @@
 from flask import *
 import requests
 # twiml == Twilio's markup language
-from twilio.twiml.messaging_response import MessagingResponse
+from twilio.twiml.messaging_response import Body, Media, Message, MessagingResponse
 
 app = Flask("recipeBot")
 
@@ -14,8 +14,6 @@ def message():
   api = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + food_input
   # search by first letter
   # api = "https://www.themealdb.com/api/json/v1/1/search.php?f=" + food_input
-  # # search random meal
-  # api = "https://www.themealdb.com/api/json/v1/1/random.php"
 
   # make a GET request to the api -- use json formatting
   api_data = requests.get(api).json()
@@ -23,11 +21,16 @@ def message():
   # Twilio language:
   # create a response SMS to communicate with Twilio library: MessagingResponse
   twilio_response = MessagingResponse()
-  media_msg = twilio_response.message()
-  text_msg = twilio_response.message()
+  media_msg = Message()
+  ingredients_msg = Message()
+  instructions_msg = Message()
   
   # print themealDB API data
   recipe = api_data['meals'][0]
+
+  # send image of prepared recipe
+  if recipe['strMealThumb'] != '':
+    media_msg.media(recipe['strMealThumb'])
 
   # recipe ingredients msg
   recipe_ingredients = ""
@@ -52,9 +55,6 @@ def message():
       recipe_ingredients += recipeLine + "\n"
   recipe_ingredients += "\n --------------------------- \n"
 
-  # send image of prepared recipe
-  if recipe['strMealThumb'] != '':
-    media_msg.media(recipe['strMealThumb'])
 
   # recipe instructions msg
   recipe_instructions = ""
@@ -77,9 +77,14 @@ def message():
 
 
   # add content to msg body
-  text_msg.body(recipe_instructions)
-  media_msg.body(recipe_ingredients)
+  ingredients_msg.body(recipe_ingredients)
+  instructions_msg.body(recipe_instructions)
+
+  twilio_response.append(media_msg)
+  twilio_response.append(ingredients_msg)
+  twilio_response.append(instructions_msg)
   return str(twilio_response)
+
 
 if __name__ == '__main__':
   app.run(debug=True)
